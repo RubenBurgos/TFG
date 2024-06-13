@@ -1,8 +1,8 @@
 import os
 from simple_term_menu import TerminalMenu
 
-class osint_plus:
-    def __init__(self) -> None:
+class Osint_Plus:
+    def __init__(self):
         tool_list=[] # INICIAR TODAS LAS TOOLS
 
     def run(self):
@@ -105,5 +105,5 @@ class osint_plus:
                     scan_tools.remove(selection)
                     available_tools.append(selection)
 
-osint_plus_platform = osint_plus()
+osint_plus_platform = Osint_Plus()
 osint_plus_platform.run()
