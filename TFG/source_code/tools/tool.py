@@ -5,9 +5,6 @@ class Tool:
         self.entry_data_types = entry_data_types
         self.scan_data_manager = scan_data_manager
 
-    def error_message(self):
-        print("[", self.app_name, "] Error message function not overwritten")
-
     def scan(self):
         print("[", self.app_name, "] Scan function not overwritten")
 
