@@ -17,4 +17,3 @@ class Scan_Data_Manager:
             if output_data_object.data == data.data:
                 output_data_object.add_info(data.info)
         self.output_data.append(data)
-
