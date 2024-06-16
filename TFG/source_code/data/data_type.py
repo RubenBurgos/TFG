@@ -8,6 +8,12 @@ class Data_Type(Enum):
     URL = "URL"
     KEY_STRING = "Key String"
 
+    def get_data_type_list():
+        data_type_list = []
+        for data_type in Data_Type:
+            data_type_list.append(data_type.value)
+        return data_type_list
+
     #def create_data_object_by_type(self, data):
     #    match self:
     #        case Data_Type.IP:

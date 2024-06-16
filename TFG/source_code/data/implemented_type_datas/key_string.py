@@ -7,7 +7,7 @@ class Key_String(Data):
         super().__init__(data, Data_Type.KEY_STRING)
 
     def check_format(self, data):
-        if type(data) == str:
+        if type(data) == str and len(data) != 0:
             return True
         else:
             return False
