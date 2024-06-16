@@ -1,14 +1,13 @@
-from validators.ip_address import ipv4, ipv6
 from source_code.data.data import Data
 from source_code.data.data_type import Data_Type
 
 
-class IP(Data):
+class Key_String(Data):
     def __init__(self, data):
-        super().__init__(data, Data_Type.IP)
+        super().__init__(data, Data_Type.KEY_STRING)
 
     def check_format(self, data):
-        if ipv4(data) or ipv6(data):
+        if type(data) == str:
             return True
         else:
             return False
