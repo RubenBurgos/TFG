@@ -13,4 +13,4 @@ class Nmap(Active_Info_Tool):
     def load_fetched_info(self):
         pass
 
-# Nmap --version-intensity 9 -A -p- -vvv <ip X.x.x.z>
+# Nmap --version-intensity 9 -A -p- -vvv <ip X.x.x.z> scanme.nmap.org
