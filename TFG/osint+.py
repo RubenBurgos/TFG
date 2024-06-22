@@ -1,12 +1,16 @@
 import os
+from time import sleep
+from threading import Thread
+from datetime import datetime
 from simple_term_menu import TerminalMenu
 from source_code.data.data_type import Data_Type
 from source_code.data.scan_data_manager import Scan_Data_Manager
 from source_code.tools.scan_tool_type import Scan_Tool_Type
+from source_code.tools.type_tools.implemented_tools.active_info_tools.nmap_tool import Nmap
 
 class Osint_Plus:
     def __init__(self):
-        self.tool_list = [] # INICIAR TODAS LAS TOOLS
+        self.tool_list = [Nmap()] # INICIAR TODAS LAS TOOLS
 
     def run(self):
         self.starting_menu()
@@ -23,7 +27,7 @@ class Osint_Plus:
             self.input_data_menu()
         elif selection == "Exit":
             os.system("clear")
-            print("PONER MENSAJE DE SALIDA")
+            print("eres una putita")
             exit(0)    
 
     def input_data_menu(self):
@@ -31,7 +35,7 @@ class Osint_Plus:
         options = Data_Type.get_data_type_list()
         options.append("Exit")
         input_data_menu = TerminalMenu(options)
-        while(scan_data_manager.input_data == None):
+        while scan_data_manager.input_data == None:
             os.system("clear")
             print("""Select the input data type to be scanned:
                 """)
@@ -39,12 +43,12 @@ class Osint_Plus:
             selection = options[menu_entry_index]
             if selection == "Exit":
                 os.system("clear")
-                print("PONER MENSAJE DE SALIDA")
+                print("eres una putita")
                 exit(0)
             for option in options:
                 if option == selection:
-                    if(scan_data_manager.set_input_data(option)):
-                        print("Input data set up correctly")
+                    if scan_data_manager.set_input_data(option):
+                        print("Input data set up correctly.")
                         self.pause_button("Continue")
                         self.scan_type_menu(scan_data_manager)
                     else:
@@ -80,12 +84,12 @@ class Osint_Plus:
         available_tools = []
         for tool in self.tool_list:
             if tool.scan_tool_type.value == scan_tool_type and tool.entry_data_types.__contains__(scan_data_manager.input_data.data_type):
-                available_tools.append(tool)
+                available_tools.append(tool.tool_name)
 
         if len(available_tools) != 0:
             options = ["Start Scan", "Deselect Tools", "Exit"]
         else:
-            print("There are no configured tools for this kind of scan with this kind of input data")
+            print("There are no configured tools for this kind of scan with this kind of input data.")
             options = ["Exit"]
             no_tools = True
             
@@ -100,12 +104,16 @@ class Osint_Plus:
                     print("""Deselect the tools that will not scan the input data.""")
                     options = scan_tools + options[-3:]
                 print("""\n Selected tools:""", scan_tools, "\n")
-            # AÑADIR EL FOR CON LAS TOOLS CON INPUTDATA TYPE IGUAL AL INTRODUCIDO y SACANTYPE EL SELECIONADO (LOS NOMBRES)
             select_tools_menu = TerminalMenu(options)
             menu_entry_index = select_tools_menu.show()
             selection = options[menu_entry_index]
-            if selection == "Start Scan": # AÑADIR MENSAJE DE SIGUIR CON OTRO SCAN, O ESPERAR A QUE ACABE Y LANZAR SCANEOS
+            if selection == "Start Scan":
+                if len(scan_tools) == 0:
+                    print("You need to select at least one tool")
+                    self.pause_button("Continue")
+                    continue
                 self.pause_button("Continue")
+                self.start_scan(scan_tools, scan_data_manager)
             elif selection == "Deselect Tools":
                 select = False
                 options.remove("Deselect Tools")
@@ -125,6 +133,38 @@ class Osint_Plus:
                 else:
                     scan_tools.remove(selection)
                     available_tools.append(selection)
+
+    def start_scan(self, tool_names, scan_data_manager):
+        os.system("clear")
+        tool_threads = []
+        for tool in self.tool_list:
+            if tool_names.__contains__(tool.tool_name):
+                tool.set_scan_data_manager(scan_data_manager)
+                t = Thread(target=tool.scan_and_load_fetched_info)
+                tool_threads.append(t)
+                t.start()
+        print("The selected tools have started their scan.\nAny error will be printed below.")
+        ended_scans = 0
+        total_scans = len(tool_threads)
+        print("[" , ended_scans, "/", total_scans, "] Ended Scans")
+        while len(tool_threads) > 0:
+            sleep(1)
+            for thread in tool_threads:
+                if not thread.is_alive():
+                    ended_scans += 1
+                    print("[" , ended_scans, "/", total_scans, "] Ended Scans")
+                    tool_threads.remove(thread)
+
+        print("Generating the scan report.")
+        report_name = "Osint+_report_" + datetime.now().isoformat() + ".txt"
+        f = open(report_name, "a")
+        for data in scan_data_manager.output_data:
+            f.write(data.info)
+        f.close()
+
+        print("The scan report has been generated in the file: " + report_name)
+        self.pause_button("End")
+        exit(0)
 
 osint_plus_platform = Osint_Plus()
 osint_plus_platform.run()

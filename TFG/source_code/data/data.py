@@ -9,6 +9,7 @@ class Data:
         self.data = data
         self.data_type = data_type
         self.info = ""
+        self.add_info("", "Information has been found related to: " + self.data)
 
     def check_format(self, data):
         print("[", self.__qualname__, "] Check format function not overwritten, cant check:", data)
