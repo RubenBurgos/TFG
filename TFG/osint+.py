@@ -7,10 +7,13 @@ from source_code.data.data_type import Data_Type
 from source_code.data.scan_data_manager import Scan_Data_Manager
 from source_code.tools.scan_tool_type import Scan_Tool_Type
 from source_code.tools.type_tools.implemented_tools.active_info_tools.nmap_tool import Nmap
+from source_code.tools.type_tools.implemented_tools.malicious_info_tools.hbip import HIBP
+from source_code.tools.type_tools.implemented_tools.malicious_info_tools.abuseipdb import AbuseIPDB
+
 
 class Osint_Plus:
     def __init__(self):
-        self.tool_list = [Nmap()] # INICIAR TODAS LAS TOOLS
+        self.tool_list = [Nmap(), HIBP(), AbuseIPDB()] # INICIAR TODAS LAS TOOLS
 
     def run(self):
         self.starting_menu()
