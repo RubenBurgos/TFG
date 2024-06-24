@@ -16,7 +16,7 @@ class HIBP(Malicious_Info_Tool):
             else:
                 result = pwnedpasswords.is_password_breached(password=self.scan_data_manager.input_data.data)
         except AttributeError as exception:
-            print(exception)
+            print("[HBIP] " + str(exception))
             return None
         
         output_data = type(self.scan_data_manager.input_data)(self.scan_data_manager.input_data.data)

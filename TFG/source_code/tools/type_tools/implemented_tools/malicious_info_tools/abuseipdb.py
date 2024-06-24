@@ -1,6 +1,5 @@
 import requests
 from json import dumps, loads
-from pyhibp import pwnedpasswords, set_user_agent
 from source_code.tools.type_tools.malicious_info_tool import Malicious_Info_Tool
 from source_code.data.data_type import Data_Type
 
@@ -34,4 +33,4 @@ class AbuseIPDB(Malicious_Info_Tool):
             output_data.add_info(info, self.tool_name)
             self.scan_data_manager.add_output_data(output_data)
         else:
-            print("API Response status code not 200, it responded :" + str(response.status_code) + " - " + str(response.reason))
+            print("[AbuseIPDB] API Response status code not 200, it responded :" + str(response.status_code) + " - " + str(response.reason))
