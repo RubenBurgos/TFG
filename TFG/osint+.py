@@ -11,11 +11,11 @@ from source_code.tools.type_tools.implemented_tools.malicious_info_tools.hbip im
 from source_code.tools.type_tools.implemented_tools.malicious_info_tools.abuseipdb import AbuseIPDB
 from source_code.tools.type_tools.implemented_tools.active_info_tools.dirbuster import DirBuster
 from source_code.tools.type_tools.implemented_tools.pasive_info_tools.zoomeye import ZoomEye
-
+from source_code.tools.type_tools.implemented_tools.pasive_info_tools.hunter import Hunter
 
 class Osint_Plus:
     def __init__(self):
-        self.tool_list = [Nmap(), HIBP(), AbuseIPDB(), DirBuster(), ZoomEye()] # INICIAR TODAS LAS TOOLS
+        self.tool_list = [Nmap(), HIBP(), AbuseIPDB(), DirBuster(), ZoomEye(), Hunter()] # INICIAR TODAS LAS TOOLS
 
     def run(self):
         self.starting_menu()
