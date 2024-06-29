@@ -1,7 +1,8 @@
 import requests
 from json import dumps, loads
-from source_code.tools.type_tools.malicious_info_tool import Malicious_Info_Tool
 from source_code.data.data_type import Data_Type
+from source_code.settings.api_keys import ABUSEIPDB_KEY
+from source_code.tools.type_tools.malicious_info_tool import Malicious_Info_Tool
 
 class AbuseIPDB(Malicious_Info_Tool):
     def __init__(self):
@@ -20,10 +21,20 @@ class AbuseIPDB(Malicious_Info_Tool):
 
         headers = {
             'Accept': 'application/json',
-            'Key': 'b1b453f03f6060d8c817d82aa5b11ae745ff09b0d9f5959dd608f07243b5e432799604a772f7c48f'
+            'Key': ABUSEIPDB_KEY
         }
 
-        response = requests.request(method='GET', url=url, headers=headers, params=querystring)
+        if headers["Key"] == None:
+            print("[AbuseIPDB] You need to configure your API key to use this tool.")
+            return 0
+
+        try:
+            response = requests.request(method='GET', url=url, headers=headers, params=querystring)
+        except Exception as exception:
+            print("[AbuseIPDB] An unexpected error has been detected:\n" + str(exception))
+            print("[AbuseIPDB] Please check your conexion with the AbuseIPDB API.")
+            return 0
+        
         if response.status_code == 200:
             output_data = type(self.scan_data_manager.input_data)(self.scan_data_manager.input_data.data)
 

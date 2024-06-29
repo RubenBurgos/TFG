@@ -19,7 +19,8 @@ class DirBuster(Active_Info_Tool):
                             threads=1)
             results = scan.Run()
         except Exception as exception:
-            print("[DirBuster] - " + str(exception))
+            print("[DirBuster] An unexpected error has been detected:\n" + str(exception))
+            return 0
 
         output_data = type(self.scan_data_manager.input_data)(self.scan_data_manager.input_data.data)
         info = dumps(results, indent=2)

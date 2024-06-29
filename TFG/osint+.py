@@ -142,13 +142,13 @@ class Osint_Plus:
     def start_scan(self, tool_names, scan_data_manager):
         os.system("clear")
         tool_threads = []
+        print("The selected tools have started their scan.\nAny error will be printed below.")
         for tool in self.tool_list:
             if tool_names.__contains__(tool.tool_name):
                 tool.set_scan_data_manager(scan_data_manager)
                 t = Thread(target=tool.scan_and_load_fetched_info)
                 tool_threads.append(t)
                 t.start()
-        print("The selected tools have started their scan.\nAny error will be printed below.")
         ended_scans = 0
         total_scans = len(tool_threads)
         print("[" , ended_scans, "/", total_scans, "] Ended Scans")
@@ -159,15 +159,17 @@ class Osint_Plus:
                     ended_scans += 1
                     print("[" , ended_scans, "/", total_scans, "] Ended Scans")
                     tool_threads.remove(thread)
+        if len(scan_data_manager.output_data) == 0:
+            print("No data has been fetched by the scans, so no report has been generated.")
+        else:
+            print("Generating the scan report.")
+            report_name = "Osint+_report_" + datetime.now().isoformat() + ".txt"
+            f = open(report_name, "a")
+            for data in scan_data_manager.output_data:
+                f.write(data.info)
+            f.close()
 
-        print("Generating the scan report.")
-        report_name = "Osint+_report_" + datetime.now().isoformat() + ".txt"
-        f = open(report_name, "a")
-        for data in scan_data_manager.output_data:
-            f.write(data.info)
-        f.close()
-
-        print("The scan report has been generated in the file: " + report_name)
+            print("The scan report has been generated in the file: " + report_name)
         self.pause_button("End")
         exit(0)
 

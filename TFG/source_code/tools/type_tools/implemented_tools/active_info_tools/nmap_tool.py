@@ -13,6 +13,7 @@ class Nmap(Active_Info_Tool):
             nmap = PortScanner()
         except PortScannerError:
             print('[Nmap] Nmap tool not found, check if Nmap is installed')
+            return 0
         
         results = nmap.scan(self.scan_data_manager.input_data.data, arguments="--version-intensity 9 -A -p- -vvv")
         

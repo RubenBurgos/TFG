@@ -15,9 +15,10 @@ class HIBP(Malicious_Info_Tool):
                 result = pwnedpasswords.is_password_breached(sha1_hash=self.scan_data_manager.input_data.data)
             else:
                 result = pwnedpasswords.is_password_breached(password=self.scan_data_manager.input_data.data)
-        except AttributeError as exception:
-            print("[HBIP] " + str(exception))
-            return None
+        except Exception as exception:
+            print("[HIBP] An unexpected error has been detected:\n" + str(exception))
+            print("[HIBP] Please check your conexion with the HIBP API.")
+            return 0
         
         output_data = type(self.scan_data_manager.input_data)(self.scan_data_manager.input_data.data)
         

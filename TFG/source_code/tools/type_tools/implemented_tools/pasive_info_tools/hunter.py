@@ -1,7 +1,8 @@
 import requests
 from json import dumps, loads
-from source_code.tools.type_tools.pasive_info_tool import Pasive_Info_Tool
 from source_code.data.data_type import Data_Type
+from source_code.settings.api_keys import HUNTER_KEY
+from source_code.tools.type_tools.pasive_info_tool import Pasive_Info_Tool
 
 class Hunter(Pasive_Info_Tool):
     def __init__(self):
@@ -14,10 +15,20 @@ class Hunter(Pasive_Info_Tool):
 
         querystring = {
             'email': self.scan_data_manager.input_data.data,
-            'api_key': '087fda394581bbfde6e9e390122b321ac23d68f4',
+            'api_key': HUNTER_KEY
         }
 
-        response = requests.request(method='GET', url=url, params=querystring)
+        if querystring["api_key"] == None:
+            print("[Hunter] You need to configure your API key to use this tool.")
+            return 0
+
+        try:
+            response = requests.request(method='GET', url=url, params=querystring)
+        except Exception as exception:
+            print("[Hunter] An unexpected error has been detected:\n" + str(exception))
+            print("[Hunter] Please check your conexion with the Hunter API.")
+            return 0
+        
         if response.status_code == 200:
             output_data = type(self.scan_data_manager.input_data)(self.scan_data_manager.input_data.data)
 
