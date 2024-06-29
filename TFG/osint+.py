@@ -4,14 +4,14 @@ from threading import Thread
 from datetime import datetime
 from simple_term_menu import TerminalMenu
 from source_code.data.data_type import Data_Type
-from source_code.data.scan_data_manager import Scan_Data_Manager
 from source_code.tools.scan_tool_type import Scan_Tool_Type
-from source_code.tools.type_tools.implemented_tools.active_info_tools.nmap_tool import Nmap
+from source_code.data.scan_data_manager import Scan_Data_Manager
 from source_code.tools.type_tools.implemented_tools.malicious_info_tools.hbip import HIBP
-from source_code.tools.type_tools.implemented_tools.malicious_info_tools.abuseipdb import AbuseIPDB
-from source_code.tools.type_tools.implemented_tools.active_info_tools.dirbuster import DirBuster
-from source_code.tools.type_tools.implemented_tools.pasive_info_tools.zoomeye import ZoomEye
 from source_code.tools.type_tools.implemented_tools.pasive_info_tools.hunter import Hunter
+from source_code.tools.type_tools.implemented_tools.active_info_tools.nmap_tool import Nmap
+from source_code.tools.type_tools.implemented_tools.pasive_info_tools.zoomeye import ZoomEye
+from source_code.tools.type_tools.implemented_tools.active_info_tools.dirbuster import DirBuster
+from source_code.tools.type_tools.implemented_tools.malicious_info_tools.abuseipdb import AbuseIPDB
 
 class Osint_Plus:
     def __init__(self):
@@ -32,7 +32,6 @@ class Osint_Plus:
             self.input_data_menu()
         elif selection == "Exit":
             os.system("clear")
-            print("eres una putita")
             exit(0)    
 
     def input_data_menu(self):
@@ -48,12 +47,11 @@ class Osint_Plus:
             selection = options[menu_entry_index]
             if selection == "Exit":
                 os.system("clear")
-                print("eres una putita")
                 exit(0)
             for option in options:
                 if option == selection:
                     if scan_data_manager.set_input_data(option):
-                        print("Input data set up correctly.")
+                        print("Input data set up correctly.\n")
                         self.pause_button("Continue")
                         self.scan_type_menu(scan_data_manager)
                     else:
@@ -76,7 +74,6 @@ class Osint_Plus:
         selection = options[menu_entry_index]
         if selection == "Exit":
             os.system("clear")
-            print("PONER MENSAJE DE SALIDA")
             exit(0)
         for option in options:
             if option == selection:
@@ -117,7 +114,6 @@ class Osint_Plus:
                     print("You need to select at least one tool")
                     self.pause_button("Continue")
                     continue
-                self.pause_button("Continue")
                 self.start_scan(scan_tools, scan_data_manager)
             elif selection == "Deselect Tools":
                 select = False
@@ -129,7 +125,6 @@ class Osint_Plus:
                 options.insert(-1, "Deselect Tools")
             elif selection == "Exit":
                 os.system("clear")
-                print("PONER MENSAJE DE SALIDA")
                 exit(0)
             else:
                 if select:

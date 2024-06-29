@@ -1,6 +1,6 @@
-from validators.hashes import sha1, sha224, sha256, sha512, md5
 from source_code.data.data import Data
 from source_code.data.data_type import Data_Type
+from validators.hashes import sha1, sha224, sha256, sha512, md5
 
 
 class Hash(Data):

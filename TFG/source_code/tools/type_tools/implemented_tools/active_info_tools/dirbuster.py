@@ -1,8 +1,8 @@
 import os
 from json import dumps
 from pydirbuster import Pybuster
-from source_code.tools.type_tools.active_info_tool import Active_Info_Tool
 from source_code.data.data_type import Data_Type
+from source_code.tools.type_tools.active_info_tool import Active_Info_Tool
 
 class DirBuster(Active_Info_Tool):
     def __init__(self):

@@ -1,9 +1,9 @@
 from source_code.data.data_type import Data_Type
 from source_code.data.implemented_type_datas.ip import IP
-from source_code.data.implemented_type_datas.domain import Domain
-from source_code.data.implemented_type_datas.email import Email
-from source_code.data.implemented_type_datas.hash import Hash
 from source_code.data.implemented_type_datas.url import URL
+from source_code.data.implemented_type_datas.hash import Hash
+from source_code.data.implemented_type_datas.email import Email
+from source_code.data.implemented_type_datas.domain import Domain
 from source_code.data.implemented_type_datas.key_string import Key_String
 
 class Scan_Data_Manager:

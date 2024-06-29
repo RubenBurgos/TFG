@@ -1,5 +1,5 @@
-from validators.ip_address import ipv4, ipv6
 from source_code.data.data import Data
+from validators.ip_address import ipv4, ipv6
 from source_code.data.data_type import Data_Type
 
 

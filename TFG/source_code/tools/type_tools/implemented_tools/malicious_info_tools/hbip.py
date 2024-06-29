@@ -1,6 +1,6 @@
+from source_code.data.data_type import Data_Type
 from pyhibp import pwnedpasswords, set_user_agent
 from source_code.tools.type_tools.malicious_info_tool import Malicious_Info_Tool
-from source_code.data.data_type import Data_Type
 
 class HIBP(Malicious_Info_Tool):
     def __init__(self):
