@@ -1,7 +1,7 @@
 class Data:
     def __new__(cls, data):
         if cls.check_format(cls, data) == False:
-            print("[", cls.__qualname__,"] Incorrect format for this data type")
+            print("[", cls.__qualname__,"] Incorrect format for this data type\n")
             return None
         return super().__new__(cls)
 

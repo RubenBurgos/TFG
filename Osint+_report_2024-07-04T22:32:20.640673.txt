@@ -1,0 +1,16 @@
+
+#################################################
+#                                               #
+# Information has been found related to: prueba #
+#                                               #
+#################################################
+
+
+
+############################
+#                          #
+# HIBP (Have I Been Pwned) #
+#                          #
+############################
+
+This password or (sha1) hash has been breached, it has been used 7984 times.
