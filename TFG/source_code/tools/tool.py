@@ -3,6 +3,7 @@ class Tool:
         self.tool_name = tool_name
         self.scan_tool_type = scan_tool_type
         self.entry_data_types = entry_data_types
+        self.scan_data_manager = None
 
     def set_scan_data_manager(self, scan_data_manager):
         self.scan_data_manager = scan_data_manager
