@@ -1,7 +1,6 @@
 pydirbuster==0.5
 pyhibp==4.2.0
 python_nmap==0.7.1
-# Requests==2.32.3
 simple_term_menu==1.6.4
 validators==0.28.3
 zoomeyehk==2.2.0
